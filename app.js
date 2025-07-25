@@ -7,7 +7,7 @@ const Data = require('./models/data.js');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.port; 
+const port = process.env.Port ||3000; 
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
