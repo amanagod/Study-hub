@@ -1,41 +1,29 @@
 const mongoose = require('mongoose');
-require('dotenv').config()
+require('dotenv').config();
 
-main().then(()=>{console.log('chats database connection succesfull')})
-.catch(err => console.log(err));
-
-async function main() {
-  await mongoose.connect(process.env.url);
-}
-
-const chatschema = new mongoose.Schema({
-    name:{
-        type : String,
-        maxLength:50
-    },
-    discription:{
-        type : String
-    },
-    created_at:{
-        type : Date,
-        required:true,
-    }
-
+const conn = mongoose.createConnection(process.env.urlcha, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-const chat = mongoose.model("Chat", chatschema);
+conn.on('connected', () => {
+  console.log('Chats database connection successful');
+});
 
-// const p1 = new chat({
-    // name:"ram",
-//     discription:"Hii",
-//     created_at : new Date(),
-// });
+const chatSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    maxLength: 50,
+  },
+  discription: {
+    type: String,
+  },
+  created_at: {
+    type: Date,
+    required: true,
+  },
+});
 
-// p1.save().then((res)=>{
-//     console.log(res);
-// })
-// .catch((err)=>{
-//     console.log(err)
-// })
+const Chat = conn.model('Chat', chatSchema);
 
-module.exports=chat;
+module.exports = Chat;
