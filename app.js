@@ -113,7 +113,8 @@ app.get("/clear-database", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Go to /home");
+  // res.send("Go to /home");
+  res.redirect("/home");
 });
 
 app.listen(port, () => {
