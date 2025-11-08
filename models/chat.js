@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const conn = mongoose.createConnection(process.env.urlcha, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const conn = mongoose.createConnection(process.env.urlcha);
 
 conn.on('connected', () => {
   console.log('Chats database connection successful');
